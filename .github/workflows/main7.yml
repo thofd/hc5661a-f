@@ -45,7 +45,7 @@ jobs:
       env:
         TNAME: PSG1218  
       run: |
-        mv $GITHUB_WORKSPACE/PSG1218.config /opt/rt-n56u/trunk/.config
+        mv $GITHUB_WORKSPACE/HC5661A.config /opt/rt-n56u/trunk/.config
         chmod +x $GITHUB_WORKSPACE/public.sh
         cd /opt/rt-n56u/trunk
         $GITHUB_WORKSPACE/public.sh
