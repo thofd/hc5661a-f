@@ -1,0 +1,53 @@
+﻿name: Padavan hanwckf
+on:
+  schedule:                           # 时间表
+    - cron: '0 19 * * *'              # 每天国际时间19点，北京时间凌晨3点执行(北京+8)
+  #push:                               # push 操作
+  #  branches:                         # 分支
+  #    - master                        # 主分支
+  #   paths:                            # 路径
+  #     - openwrt/*                     # 监听openwrt目录下所有文件的push操作
+  #  paths:                            # 路径
+  #    - logs/k2.md                    # 监听logs目录下 k2.md 的push操作
+  #watch:                              # 监视操作
+  #  types: [started]                  # 点击 star 之后
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    if: github.event.repository.owner.id == github.event.sender.id  # 自己点的 start
+    steps:
+    - name: Checkout Master            # 1.导入主分支
+      uses: actions/checkout@master
+    - name: Initialization Environment # 2.初始环境的设置
+      env:
+        DEBIAN_FRONTEND: noninteractive  # 非交互模式
+      run: |
+        sudo apt-get update
+        sudo apt install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
+        cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget \
+        module-init-tools
+    - name: Clone Code                 # 3.拷贝代码
+      run: |
+        git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
+    - name: Build Tool Chain           # 4.构建工具链
+      run: |
+        cd /opt/rt-n56u/toolchain-mipsel
+        sh dl_toolchain.sh
+        mkdir /opt/images/
+    - name: Clear And Build            # 5.清理构建树并开始构建
+      env:
+        TNAME: PSG1218  
+      run: |
+        cd /opt/rt-n56u/trunk
+        sudo ./clear_tree
+        fakeroot ./build_firmware_modify $TNAME
+        sudo mv -f images/*.trx /opt/images/ 
+        echo "::set-env name=FILE_NAME::$(date "+%Y%m%d")"            
+    - name : Upload packages
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: Padavan-${{env.FILE_NAME}}
+        path: /opt/images
