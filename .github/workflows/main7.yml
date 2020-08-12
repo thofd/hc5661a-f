@@ -43,7 +43,7 @@ jobs:
         mkdir /opt/images/
     - name: Clear And Build            # 5.清理构建树并开始构建
       env:
-        TNAME: PSG1218  
+        TNAME: HC5661A  
       run: |
         mv $GITHUB_WORKSPACE/HC5661A.config /opt/rt-n56u/trunk/.config
         chmod +x $GITHUB_WORKSPACE/public.sh
