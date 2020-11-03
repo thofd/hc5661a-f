@@ -52,10 +52,10 @@ jobs:
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/ 
-        echo "::set-env name=FILE_NAME::$(date "+%Y%m%d")"            
+          
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: Padavan-${{env.FILE_NAME}}
+        name: Padavan-j1s
         path: /opt/images
