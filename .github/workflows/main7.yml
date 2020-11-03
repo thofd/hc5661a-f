@@ -55,7 +55,6 @@ jobs:
           
     - name : Upload packages
       uses: actions/upload-artifact@master
-      if: always()
       with:
-        name: Padavan-j1s
+        name: Padavan j1s
         path: /opt/images
