@@ -1,4 +1,4 @@
-name: Padavan hanwckf
+name: Padavan HC5661A
 on:
   #schedule:                           # 时间表
   #  - cron: '0 19 * * *'              # 每天国际时间19点，北京时间凌晨3点执行(北京+8)
@@ -30,7 +30,7 @@ jobs:
         module-init-tools
     - name: Clone Code                 # 3.拷贝代码
       run: |
-        git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/xumng123/rt-n56u.git /opt/rt-n56u
     - name: Build Tool Chain           # 4.构建工具链
       run: |
         cd /opt/rt-n56u/toolchain-mipsel
