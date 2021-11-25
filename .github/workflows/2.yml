@@ -50,5 +50,6 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: Padavan-${{env.FILE_NAME}}
+        name: Pada-1s
+        #name: Padavan-${{env.FILE_NAME}}
         path: /opt/images
