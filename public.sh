@@ -61,12 +61,12 @@ sed -i "/CONFIG_FIRMWARE_INCLUDE_WYYBIN/d" >> .config     # 删除配置项 网�
 echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config  # SS plus+
 echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config     # SS server
 echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config
-echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config
+echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config
 
 #  代理
 echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config      # TUNSAFE
 echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config       # srelay
-echo "CONFIG_FIRMWARE_INCLUDE_IPT2SOCKS=n" >> .config    # IPT2
+echo "CONFIG_FIRMWARE_INCLUDE_IPT2SOCKS=y" >> .config    # IPT2
 
 # 广告
 echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=n" >> .config       # adbyby plus+
